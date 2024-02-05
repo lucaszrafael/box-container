@@ -42,3 +42,7 @@ Let's add a step to create a new Meteor project so that developers can quickly g
 ## 5. Dependency Management with npm
 Meteor uses npm to manage project dependencies. To install npm packages in the Meteor project, use the following command:
 
+## 6. Deploy on Meteor Cloud(Galaxy)
+Meteor Cloud, also known as Galaxy, is a platform as a service (PaaS) specifically designed for Meteor.js applications. While both Meteor Cloud (Galaxy) and Heroku offer hosting solutions for web applications,.
+While Heroku is a versatile platform that supports a wide range of applications and frameworks, Meteor Cloud offers a more tailored and optimized solution specifically for Meteor.js applications, providing benefits in terms of performance, scalability, and developer experience.
+
