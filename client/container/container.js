@@ -16,13 +16,13 @@ Template.container.helpers({
 
         if(!data) return
 
-        //Trata os dados para devolver os tipos para o html de forma correta
+        // Treats the data to return the types to the HTML correctly
         let items = data.items.map((item) => {
 
             if(item.type === "box"){
                 item.box = true
 
-                //Caso o box não tiver cor, deixa como orange
+                // If the box doesn't have a color, set it to orange
                 if(!item.color) item.color = "orange"
 
             } else{
@@ -48,99 +48,97 @@ Template.container.events({
         event.stopPropagation()
         Template.instance().add_hover.set(false)
     },
-    //Adiciona um box ao container
+    // Adds a box to the container
     "click .btn_add_box": function (event, template) {
         event.stopPropagation()
-        //Pega os dados do container
+        // Gets the container data
         let container = Template.instance().container_data.get()
 
-        //Adiciona uma box aos itens do container
+        // Adds a box to the container items
         container.items.push({type: "box"})
 
-        //Atualiza os dados do container
-
+        // Updates the container data
         Template.instance().container_data.set(container)
     },
-    //Adiciona um container ao container pai
+    // Adds a container to the parent container
     "click .btn_add_container": function (event, template) {
         event.stopPropagation()
-        //Pega os dados do container
+        // Gets the container data
         let container = Template.instance().container_data.get()
 
-        //Adiciona um container vazio aos itens do container pai
+        // Adds an empty container to the parent container items
         container.items.push({type: "container", items: []})
 
-        //Atualiza os dados do container
-
+        // Updates the container data
         Template.instance().container_data.set(container)
     },
 
-    //Submete o formulário de construção do container
+    // Submits the container build form
     "submit #build_form": function (event, template) {
         event.preventDefault()
 
         let build_data = $("#build_input").val()
 
-        //Verifica se o input é um json válido
+        // Checks if the input is valid JSON
         try {
 
-            //Remove as aspas duplas iniciais e finais da string
+            // Removes the initial and final double quotes from the string
             build_data = build_data.replace(/^"(.*)"$/, '$1')
 
             let data_json = JSON.parse(build_data)
 
 
-            //Atualiza os dados do container
+            // Updates the container data
             Template.instance().container_data.set(null)
 
-            //Cria um delay para atualizar os dados do container
+            // Creates a delay to update the container data
             Meteor.setTimeout(() => {
                 template.container_data.set(data_json)
             }, 50)
 
 
         } catch (error) {
-            alert("JSON inválido")
+            alert("Invalid JSON")
         }
 
     },
 
-    //Imprime o json do container
+    // Prints the container JSON
     "click #print_json_btn": function (event, template) {
-        //Pega os dados do container
+        // Gets the container data
         let data = Template.instance().container_data.get()
 
-        //Transforma os dados em string
+        // Converts the data to string
         let data_string = JSON.stringify(data, null, 2)
 
-        //Imprime os dados no input json_print_input
+        // Prints the data in the json_print_input
         $("#json_print_input").val(data_string)
     },
 
-    //Salva os dados do container no banco de dados
+    // Saves the container data to the database
     "click #save_container_btn": function (event, template) {
-        //Pega os dados do container
+        // Gets the container data
         let data = Template.instance().container_data.get()
 
-        //Pega o id do app. Caso não tiver, cria um novo app. Caso tiver, atualiza os dados do app
+        // Gets the app ID. If not available, creates a new app. If available, updates the app data
 
         let app_id = Router.current().params.app_id
 
         if(app_id){
-            //Atualiza os dados do app
+            // Updates the app data
             let result = Apps.update({_id: app_id}, {$set: data})
 
             if(result){
-                window.alert("Dados atualizados com sucesso")
+                window.alert("Data updated successfully")
             } else{
-                window.alert("Erro ao atualizar os dados")
+                window.alert("Error updating data")
             }
         } else{
-            //Cria um novo app
+            // Creates a new app
             let app_id = Apps.insert(data)
 
             if(app_id){
-                //Redireciona para a página do app
+                // Redirects to the app page
                 Router.go("app", {app_id: app_id})
             }
         }
@@ -154,11 +152,11 @@ Template.container.onRendered(function () {
 
 Template.container.onCreated(function () {
 
-    //Variavel que armazena todos os elementos do container. Se estiver na rota do app, pega os dados do container e passa os elementos do banco de dados
+    // Variable that stores all the container elements. If on the app route, fetches container data and passes elements from the database
 
     let container_data
 
-    //Todo Se tiver itens cadastrados, adiciona
+    // If there are registered items, add them
 
     let app_id = Router.current().params.app_id
 
@@ -166,12 +164,12 @@ Template.container.onCreated(function () {
         container_data = Apps.findOne({_id: app_id})
         console.log("container_data", container_data)
     } else {
-        //Se tiver dados no container, adiciona
+        // If there is data in the container, add it
         if (this.data && !this.data.main) {
             container_data = this.data
         }
 
-        //Se for a rota principal, cria um container vazio
+        // If it's the main route, create an empty container
         if(this.data.main){
             container_data = {
                 "type": "container", "items": []
@@ -183,7 +181,7 @@ Template.container.onCreated(function () {
 
     Template.instance().container_data = new ReactiveVar(container_data)
 
-    //Variável que controla a visibilidade dos botões container e box
+    // Variable that controls the visibility of container and box buttons
     Template.instance().add_hover = new ReactiveVar(false)
 
 });
