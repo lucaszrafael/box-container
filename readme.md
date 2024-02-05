@@ -1,8 +1,8 @@
 
 
-## Click here to access the app: [Deploy Link](https://box-containerpowr.meteorapp.com/)<br>
+# Click here to access the app: [Deploy Link](https://box-containerpowr.meteorapp.com/)<br>
 
-# Installation Tutorial
+## Installation Tutorial
 
 Meteor.js is a comprehensive JavaScript framework that simplifies real-time web application development. I've used MeteorJS because of his simplicity, being server and client side.<br>The current project utilizes version 2.13.3 of Meteor.js, so it is necessary to first install version 
 ### 14.21.3 of Node.js.
