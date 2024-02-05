@@ -1,0 +1,111 @@
+<template name="container">
+    <style>
+        .box-container{
+            padding: 10px;
+            padding-right: 0;
+            border: 2px solid black;
+            display: flex;
+            flex-wrap: wrap;
+            margin: 10px;
+        }
+
+        .box{
+            width: 7.5vw;
+            height: 7.5vw;
+            border: 2px solid;
+            margin-right: 10px;
+        }
+
+        .box:last-child{
+            margin-right: 0px;
+        }
+        .box.orange {
+            background-color: orange;
+        }
+        .box.red {
+            background-color: red;
+        }
+        .box.green {
+            background-color: green;
+        }
+        .btn_area{
+            position: relative;
+            margin-right: 10px;
+        }
+
+        .btn_add{
+
+        }
+        .btn_add_container{
+            position: absolute;
+            top: -20px;
+            left: -60px;
+            z-index: 1000;
+        }
+        .btn_add_box{
+            position: absolute;
+            top: -20px;
+            right: -60px;
+            z-index: 1000;
+        }
+
+    </style>
+    <div class="box-container">
+        {{#each items}}
+            {{#if box}}
+                <div class="box {{color}}">
+                    &nbsp;
+                </div>
+            {{/if}}
+            {{#if container}}
+                {{> container}}
+            {{/if}}
+        {{/each}}
+        <div class="btn_area">
+            <button class="btn btn_add">Add</button>
+            <button class="btn btn_add_container" style="display: {{status_buttons}}">
+                Container
+            </button>
+            <button class="btn btn_add_box" style="display: {{status_buttons}}">
+                Box
+            </button>
+        </div>
+    </div>
+
+    {{! Apresenta funções pertinentes ao container principal}}
+    {{#if main}}
+        {{! Form para fazer a build}}
+        <div>
+            <style>
+                #build_input_area, #build_button{
+                    display: inline-block;
+                    vertical-align: top;
+                }
+                #build_button{
+                    margin-left: 20px;
+                }
+            </style>
+            <h2>Build Container</h2>
+            <form id="build_form" action="">
+                <div id="build_input_area" style="width: 80%">
+                    <textarea id="build_input" rows="4" cols="50" style="width: 100%;" value='"{"type": "container", "items": [{"type": "box"}, {"type": "container", "items": [{"type": "box", "color": "green"}, {"type": "box", "color": "red"}]}]}"'></textarea>
+                </div>
+                <button id="build_button" class="btn" type="submit">Build</button>
+            </form>
+        </div>
+
+        {{!Botão para imprimir o JSON do container}}
+        <div>
+            <h2>Print JSON</h2>
+            <button id="print_json_btn" class="btn" style="margin-bottom: 10px">Print</button>
+            <textarea id="json_print_input" rows="8" cols="50" style="width: 100%;" value=''></textarea>
+        </div>
+
+        {{!Botão para salvar o container}}
+        <div>
+            <h2>Save Container</h2>
+            <button id="save_container_btn" class="btn">Save</button>
+        </div>
+
+    {{/if}}
+</template>

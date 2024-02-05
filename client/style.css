@@ -1,0 +1,25 @@
+body {
+  padding: 10px;
+  font-family: sans-serif;
+  margin: 50px;
+}
+
+/*Estiliza o botão de adicionar*/
+button {
+  padding: 10px;
+  border: 2px solid black;
+  height: 50px;
+  line-height: 20px;
+  border-radius: 10px;
+  min-width: 100px;
+  text-align: center;
+  font-size: 18px;
+  position: relative;
+  background-color: #fff;
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: lightblue;
+
+}
