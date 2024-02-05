@@ -2,9 +2,13 @@
 
 # Click here to access the app: [Deploy Link](https://box-containerpowr.meteorapp.com/)<br>
 
+## Why MeteorJS
+
+MeteorJS is a full-stack JavaScript framework for building modern web and mobile applications. While it utilizes Node.js under the hood for server-side functionality, Meteor provides a comprehensive ecosystem that includes its own build system, data synchronization, real-time updates, and more. So, while it incorporates Node.js, it's more accurate to describe MeteorJS as a framework in its own right rather than simply a Node.js framework.
+
 ## Installation Tutorial
 
-Meteor.js is a comprehensive JavaScript framework that simplifies real-time web application development. I've used MeteorJS because of his simplicity, being server and client side.<br>The current project utilizes version 2.13.3 of Meteor.js, so it is necessary to first install version 
+The current project utilizes version 2.13.3 of Meteor.js, so it is necessary to first install version 
 ### 14.21.3 of Node.js.
 
 ## 1. Node.js Installation
